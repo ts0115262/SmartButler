@@ -2,17 +2,13 @@ package com.example.project.smartbutler;
 
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.project.smartbutler.fragment.ButlerFragment;
@@ -85,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                L.d( "onPageSelected: " + position);
+                L.d("onPageSelected: " + position, TAG);
                 if (position == 0) {
                     fab_setting.setVisibility(View.GONE);
                 } else {
