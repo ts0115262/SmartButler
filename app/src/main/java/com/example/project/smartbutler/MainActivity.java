@@ -20,13 +20,14 @@ import com.example.project.smartbutler.fragment.GirlFragment;
 import com.example.project.smartbutler.fragment.UserFragment;
 import com.example.project.smartbutler.fragment.WeChatFragment;
 import com.example.project.smartbutler.ui.SettingActivity;
+import com.example.project.smartbutler.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final String TAG ="MainActivity";
+    private final String TAG = "MainActivity";
     //TableLayout
     private TabLayout mTabLayout;
     //ViewPager
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         mTabLayout = findViewById(R.id.mTabLayout);
         mViewPager = findViewById(R.id.mViewPager);
-        fab_setting=findViewById(R.id.fab_setting);
+        fab_setting = findViewById(R.id.fab_setting);
         fab_setting.setOnClickListener(this);
         fab_setting.setVisibility(View.GONE);
 
@@ -84,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                Log.d(TAG, "onPageSelected: "+position);
-                if (position==0){
+                L.d( "onPageSelected: " + position);
+                if (position == 0) {
                     fab_setting.setVisibility(View.GONE);
-                }else {
+                } else {
                     fab_setting.setVisibility(View.VISIBLE);
                 }
             }
