@@ -14,4 +14,7 @@ public class StaticClass {
     public static final int HANDLER_SPLASH = 1001;
     //判断程序是否第一次运行
     public static final String SHRAE_ISFRIST = "is First";
+
+    //Bugly Key
+    public static final String BUGLY_APP_KEY= "432f9e5ab3";
 }

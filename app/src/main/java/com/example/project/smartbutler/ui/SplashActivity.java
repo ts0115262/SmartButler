@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                 case StaticClass.HANDLER_SPLASH:
                     //判断程序是否第一次运行
                     if (isFirst()) {
-                        startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     } else
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
                     finish();

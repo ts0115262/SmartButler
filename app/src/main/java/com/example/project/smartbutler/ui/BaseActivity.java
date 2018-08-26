@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.example.project.smartbutler.utils.StaticClass;
+import com.tencent.bugly.crashreport.CrashReport;
+
 /**
  * 主要做的事情
  * 1.统一的属性
@@ -24,7 +27,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //初始化Bugly
+        CrashReport.initCrashReport(getApplicationContext(), StaticClass.BUGLY_APP_KEY, true);
         //显示返回键
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

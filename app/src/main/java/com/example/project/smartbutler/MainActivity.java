@@ -17,6 +17,8 @@ import com.example.project.smartbutler.fragment.UserFragment;
 import com.example.project.smartbutler.fragment.WeChatFragment;
 import com.example.project.smartbutler.ui.SettingActivity;
 import com.example.project.smartbutler.utils.L;
+import com.example.project.smartbutler.utils.StaticClass;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +42,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        CrashReport.initCrashReport(getApplicationContext(), StaticClass.BUGLY_APP_KEY, true);
         //去掉阴影
         getSupportActionBar().setElevation(0);
 
         initDate();
         initView();
+        
     }
 
     private void initDate() {
@@ -68,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab_setting = findViewById(R.id.fab_setting);
         fab_setting.setOnClickListener(this);
         fab_setting.setVisibility(View.GONE);
-
+        //预加载
+        mViewPager.setOffscreenPageLimit(mFragment.size());
 
 
         //mViewPager滑动监听
@@ -94,7 +98,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        //预加载
+        mViewPager.setOffscreenPageLimit(mFragment.size());
+        //设置适配器
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            //选中的Item
+            @Override
+            public Fragment getItem(int position) {
+                return mFragment.get(position);
+            }
 
+            //返回item的个数
+            @Override
+            public int getCount() {
+                return mFragment.size();
+            }
+
+
+            //设置标题
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mTitle.get(position);
+            }
+        });
+
+        //绑定
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
