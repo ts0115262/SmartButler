@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab_setting.setOnClickListener(this);
         fab_setting.setVisibility(View.GONE);
 
-        //预加载
-        mViewPager.setOffscreenPageLimit(mFragment.size());
+
 
         //mViewPager滑动监听
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -95,29 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //设置适配器
-        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            //选中的Item
-            @Override
-            public Fragment getItem(int position) {
-                return mFragment.get(position);
-            }
 
-            //返回item的个数
-            @Override
-            public int getCount() {
-                return mFragment.size();
-            }
-
-            //设置标题
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return mTitle.get(position);
-            }
-        });
-
-        //绑定
-        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
