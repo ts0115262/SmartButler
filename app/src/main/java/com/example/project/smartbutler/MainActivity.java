@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager mViewPager;
     //TiTle
     private List<String> mTitle;
+
     //Fragment
     private List<Fragment> mFragment;
     //悬浮窗
@@ -42,13 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CrashReport.initCrashReport(getApplicationContext(), StaticClass.BUGLY_APP_KEY, true);
         //去掉阴影
         getSupportActionBar().setElevation(0);
 
         initDate();
         initView();
-        
+
     }
 
     private void initDate() {

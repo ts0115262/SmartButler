@@ -14,9 +14,13 @@ import android.widget.ImageView;
 import com.example.project.smartbutler.MainActivity;
 import com.example.project.smartbutler.R;
 import com.example.project.smartbutler.utils.L;
+import com.example.project.smartbutler.utils.StaticClass;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.Bmob;
 
 public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,6 +36,8 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bmob.initialize(this, StaticClass.BMOB_APP_ID);
+        CrashReport.initCrashReport(getApplicationContext(), StaticClass.BUGLY_APP_KEY, true);
         setContentView(R.layout.activity_guide);
         initView();
     }

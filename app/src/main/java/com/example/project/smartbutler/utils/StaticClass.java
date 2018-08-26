@@ -16,5 +16,8 @@ public class StaticClass {
     public static final String SHRAE_ISFRIST = "is First";
 
     //Bugly Key
-    public static final String BUGLY_APP_KEY= "432f9e5ab3";
+    public static final String BUGLY_APP_KEY = "432f9e5ab3";
+
+    //Bmod Application ID
+    public static final String BMOB_APP_ID = "f47b39c0e772aee95d4bd9eda8cf5b37";
 }
