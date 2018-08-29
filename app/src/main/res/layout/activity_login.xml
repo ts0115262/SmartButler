@@ -12,11 +12,15 @@
         android:src="@mipmap/ic_launcher" />
 
     <EditText
+        android:inputType="textPersonName"
+        android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="用户名" />
 
     <EditText
+        android:inputType="textPassword"
+        android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="密码" />
@@ -27,6 +31,7 @@
         android:orientation="vertical">
 
         <CheckBox
+            android:id="@+id/cb_remember"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
