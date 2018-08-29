@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.LogPrinter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -36,8 +37,6 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bmob.initialize(this, StaticClass.BMOB_APP_ID);
-        CrashReport.initCrashReport(getApplicationContext(), StaticClass.BUGLY_APP_KEY, true);
         setContentView(R.layout.activity_guide);
         initView();
     }
@@ -124,7 +123,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.iv_back:
             case R.id.btn_start:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
         }

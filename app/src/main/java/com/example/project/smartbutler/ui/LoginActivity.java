@@ -11,6 +11,7 @@ import com.example.project.smartbutler.R;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_registered;
+    private Button btn_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void initView() {
 
         btn_registered = findViewById(R.id.btn_registered);
+        btn_login = findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(this);
         btn_registered.setOnClickListener(this);
     }
 
@@ -32,6 +35,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_registered:
                 startActivity(new Intent(this, RegisteredActivity.class));
+                break;
+            case R.id.btn_login:
+
                 break;
         }
     }

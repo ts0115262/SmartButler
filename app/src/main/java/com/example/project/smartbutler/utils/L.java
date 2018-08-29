@@ -7,7 +7,7 @@ public class L {
     //开关
     public static final boolean DEBUG = true;
     //TAG
-    public static final String TAG = "SmartButler";
+    public static final String TAG = "Douban";
 
     //四个等级 DIWE
 

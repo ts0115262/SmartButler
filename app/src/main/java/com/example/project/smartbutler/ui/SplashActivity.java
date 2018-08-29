@@ -12,6 +12,9 @@ import com.example.project.smartbutler.R;
 import com.example.project.smartbutler.utils.ShareUtils;
 import com.example.project.smartbutler.utils.StaticClass;
 import com.example.project.smartbutler.utils.UtilTools;
+import com.tencent.bugly.crashreport.CrashReport;
+
+import cn.bmob.v3.Bmob;
 
 public class SplashActivity extends AppCompatActivity {
     /**
@@ -29,9 +32,9 @@ public class SplashActivity extends AppCompatActivity {
                 case StaticClass.HANDLER_SPLASH:
                     //判断程序是否第一次运行
                     if (isFirst()) {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                    } else
                         startActivity(new Intent(SplashActivity.this, GuideActivity.class));
+                    } else
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     finish();
                     break;
             }
@@ -57,6 +60,9 @@ public class SplashActivity extends AppCompatActivity {
 
         initView();
 
+        Bmob.initialize(this, StaticClass.BMOB_APP_ID);
+        CrashReport.initCrashReport(getApplicationContext(), StaticClass.BUGLY_APP_KEY, true);
+
     }
 
     private void initView() {
@@ -64,6 +70,6 @@ public class SplashActivity extends AppCompatActivity {
         handler.sendEmptyMessageDelayed(StaticClass.HANDLER_SPLASH, 2000);
         tv_splash = findViewById(R.id.tv_splash);
         //设置字体
-        UtilTools.setFont(this,tv_splash);
+        UtilTools.setFont(this, tv_splash);
     }
 }

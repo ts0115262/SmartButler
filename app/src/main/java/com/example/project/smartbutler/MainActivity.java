@@ -17,8 +17,6 @@ import com.example.project.smartbutler.fragment.UserFragment;
 import com.example.project.smartbutler.fragment.WeChatFragment;
 import com.example.project.smartbutler.ui.SettingActivity;
 import com.example.project.smartbutler.utils.L;
-import com.example.project.smartbutler.utils.StaticClass;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
