@@ -80,30 +80,27 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                 if (!TextUtils.isEmpty(now) && !TextUtils.isEmpty(new_password) && !TextUtils.isEmpty(newPassword)) {
                     //判断密码是否相等
                     if (new_password.equals(newPassword)) {
-                        MyUser user = new MyUser();
-                        user.setUsername(name);
-                        user.setPassword(now);
-                        //登陆
-                        user.login(new SaveListener<MyUser>() {
-                            @Override
-                            public void done(MyUser myUser, BmobException e) {
-                                //更新密码
-                                if (e == null)
-                                    MyUser.updateCurrentUserPassword(now, new_password, new UpdateListener() {
-                                        @Override
-                                        public void done(BmobException e) {
-                                            if (e == null) {
-                                                Toast.makeText(ForgetPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                                finish();
-                                            } else {
-                                                Toast.makeText(ForgetPasswordActivity.this, "修改失败" + e.toString(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                                else
-                                    Toast.makeText(ForgetPasswordActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                       MyUser user = new MyUser();
+                       user.setUsername(name);
+                       user.setPassword(now);
+                       //登陆
+                       user.login(new SaveListener<MyUser>() {
+                           @Override
+                           public void done(MyUser myUser, BmobException e) {
+                               //更新密码
+                               MyUser.updateCurrentUserPassword(now, new_password, new UpdateListener() {
+                                   @Override
+                                   public void done(BmobException e) {
+                                       if (e==null){
+                                           Toast.makeText(ForgetPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                           finish();
+                                       }else{
+                                           Toast.makeText(ForgetPasswordActivity.this, "修改失败"+e.toString(), Toast.LENGTH_SHORT).show();
+                                       }
+                                   }
+                               });
+                           }
+                       });
                     } else {
                         Toast.makeText(this, "两次输入密码不想等", Toast.LENGTH_SHORT).show();
                     }
