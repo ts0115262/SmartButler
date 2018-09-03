@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.smartbutler.MainActivity;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText et_name;
     private EditText et_password;
     private CheckBox cb_remember;
+    private TextView tv_forget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +55,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btn_registered = findViewById(R.id.btn_registered);
         btn_login = findViewById(R.id.btn_login);
-        btn_login.setOnClickListener(this);
-        btn_registered.setOnClickListener(this);
         cb_remember = findViewById(R.id.cb_remember);
-
         et_name = findViewById(R.id.et_name);
         et_password = findViewById(R.id.et_password);
+        tv_forget = findViewById(R.id.tv_forget);
+
+        btn_login.setOnClickListener(this);
+        btn_registered.setOnClickListener(this);
+        tv_forget.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_forget:
+                startActivity(new Intent(this,ForgetPasswordActivity.class));
+                break;
             case R.id.btn_registered:
                 startActivity(new Intent(this, RegisteredActivity.class));
                 break;
