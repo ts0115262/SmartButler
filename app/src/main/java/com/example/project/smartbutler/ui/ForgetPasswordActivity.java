@@ -1,6 +1,5 @@
 package com.example.project.smartbutler.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,7 +14,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
-public class ForgetPasswordActivity extends AppCompatActivity implements View.OnClickListener {
+public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
     private EditText et_name;
     private Button btn_forget_password;
     private EditText et_email;
@@ -67,7 +66,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                         }
                     });
                 } else {
-                    Toast.makeText(this, "输入框不能为空", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请填写邮箱地址", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_update_password:
@@ -80,29 +79,29 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                 if (!TextUtils.isEmpty(now) && !TextUtils.isEmpty(new_password) && !TextUtils.isEmpty(newPassword)) {
                     //判断密码是否相等
                     if (new_password.equals(newPassword)) {
-                       MyUser user = new MyUser();
-                       user.setUsername(name);
-                       user.setPassword(now);
-                       //登陆
-                       user.login(new SaveListener<MyUser>() {
-                           @Override
-                           public void done(MyUser myUser, BmobException e) {
-                               //更新密码
-                               MyUser.updateCurrentUserPassword(now, new_password, new UpdateListener() {
-                                   @Override
-                                   public void done(BmobException e) {
-                                       if (e==null){
-                                           Toast.makeText(ForgetPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                           finish();
-                                       }else{
-                                           Toast.makeText(ForgetPasswordActivity.this, "修改失败"+e.toString(), Toast.LENGTH_SHORT).show();
-                                       }
-                                   }
-                               });
-                           }
-                       });
+                        MyUser user = new MyUser();
+                        user.setUsername(name);
+                        user.setPassword(now);
+                        //登陆
+                        user.login(new SaveListener<MyUser>() {
+                            @Override
+                            public void done(MyUser myUser, BmobException e) {
+                                //更新密码
+                                MyUser.updateCurrentUserPassword(now, new_password, new UpdateListener() {
+                                    @Override
+                                    public void done(BmobException e) {
+                                        if (e == null) {
+                                            Toast.makeText(ForgetPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        } else {
+                                            Toast.makeText(ForgetPasswordActivity.this, "修改失败" + e.toString(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        });
                     } else {
-                        Toast.makeText(this, "两次输入密码不想等", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "两次输入密码不相同", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(this, "输入框不能为空", Toast.LENGTH_SHORT).show();

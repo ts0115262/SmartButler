@@ -37,14 +37,14 @@ public class RegisteredActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        et_user = (EditText) findViewById(R.id.et_user);
-        et_age = (EditText) findViewById(R.id.et_age);
-        et_desc = (EditText) findViewById(R.id.et_desc);
-        mRadioGroup = (RadioGroup) findViewById(R.id.mRadioGroup);
-        et_pass = (EditText) findViewById(R.id.et_pass);
-        et_password = (EditText) findViewById(R.id.et_password);
-        et_email = (EditText) findViewById(R.id.et_email);
-        btnRegistered = (Button) findViewById(R.id.btnRegistered);
+        et_user = findViewById(R.id.et_user);
+        et_age = findViewById(R.id.et_age);
+        et_desc = findViewById(R.id.et_desc);
+        mRadioGroup = findViewById(R.id.mRadioGroup);
+        et_pass = findViewById(R.id.et_pass);
+        et_password = findViewById(R.id.et_password);
+        et_email = findViewById(R.id.et_email);
+        btnRegistered = findViewById(R.id.btnRegistered);
         btnRegistered.setOnClickListener(this);
     }
 
