@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     implementation 'cn.bmob.android:bmob-sdk:3.6.3'
     implementation 'cn.bmob.android:http-legacy:1.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -9,6 +9,7 @@ import android.view.WindowManager;
 
 import com.example.project.smartbutler.R;
 
+
 public class CustomDialog extends Dialog {
 
 
