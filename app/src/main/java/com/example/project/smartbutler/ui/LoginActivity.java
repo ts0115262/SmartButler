@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btn_registered.setOnClickListener(this);
         tv_forget.setOnClickListener(this);
 
-        dialog = new CustomDialog(this,1000,1000,R.layout.dialog_loding,R.style.Theme_dialog, Gravity.CENTER,R.style.pop_anim_style);
+        dialog = new CustomDialog(this, 1000, 1000, R.layout.dialog_loding, R.style.Theme_dialog, Gravity.CENTER, R.style.pop_anim_style);
         dialog.setCancelable(false);
     }
 
@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_forget:
-                startActivity(new Intent(this,ForgetPasswordActivity.class));
+                startActivity(new Intent(this, ForgetPasswordActivity.class));
                 break;
             case R.id.btn_registered:
                 startActivity(new Intent(this, RegisteredActivity.class));
