@@ -3,11 +3,15 @@ package com.example.project.smartbutler.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.project.smartbutler.application.BaseApplication;
+import com.example.project.smartbutler.ui.BaseActivity;
+
 public class ShareUtils {
 
     private static String NAME = "config";
 
     public static void putString(Context mContent, String key, String value) {
+
         SharedPreferences sp = mContent.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         sp.edit().putString(key, value).apply();
     }

@@ -1,13 +1,21 @@
 package com.example.project.smartbutler.fragment;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +29,12 @@ import android.widget.Toast;
 import com.example.project.smartbutler.R;
 import com.example.project.smartbutler.entity.MyUser;
 import com.example.project.smartbutler.utils.L;
+import com.example.project.smartbutler.utils.ShareUtils;
+import com.example.project.smartbutler.utils.UtilTools;
 import com.example.project.smartbutler.view.CustomDialog;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import cn.bmob.v3.BmobUser;
@@ -84,6 +96,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btn_update_ok.setOnClickListener(this);
         profile_image = view.findViewById(R.id.profile_image);
         profile_image.setOnClickListener(this);
+
+        UtilTools.getImageToShare(getActivity(),profile_image);
 
         dialog = new CustomDialog(getActivity(), WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, R.layout.dialog_photo, R.style.Theme_dialog, Gravity.BOTTOM, R.style.pop_anim_style);
         dialog.setCancelable(false);
@@ -210,8 +224,31 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 Uri.fromFile(new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME)));
         startActivityForResult(intent, CAMERA_REQUESTCODE);
         dialog.dismiss();
-
+//        File file = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
+//        if (!file.exists()) {
+//            file.mkdirs();
+//        }
+//
+//        Uri pictureUri;
+//
+//        File pictureFile = new File(PHOTO_IMAGE_FILE_NAME);
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            ContentValues contentValues = new ContentValues(1);
+//            contentValues.put(MediaStore.Images.Media.DATA, pictureFile.getAbsolutePath());
+//            pictureUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+//        } else {
+//            intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            pictureUri = Uri.fromFile(pictureFile);
+//        }
+//        if (intent != null) {
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT,
+//                    pictureUri);
+//            startActivityForResult(intent, 1);
+//        }
     }
+
 
     void setEnable(boolean is) {
         et_username.setEnabled(is);
@@ -228,11 +265,19 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     startPhotoZoom(data.getData());
                     break;
                 case CAMERA_REQUESTCODE:
-                    tempFile = new File(Environment.getExternalStorageDirectory(),PHOTO_IMAGE_FILE_NAME);
+                    tempFile = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
                     startPhotoZoom(Uri.fromFile(tempFile));
                     break;
                 case RESULT_REQUESTCODE:
+                    //有可能点击取消
+                    if (data != null) {
+                        //拿到图片设置
+                        setImageToView(data);
+                        //既然已经设置了图片，原先的就应该删除
+                        if (tempFile != null)
+                            tempFile.delete();
 
+                    }
                     break;
             }
 
@@ -241,19 +286,37 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     //裁剪
     private void startPhotoZoom(Uri uri) {
 
-        if(uri ==null){
-            L.e("uri==null",getActivity().getClass().getName());
+        if (uri == null) {
+            L.e("uri==null", getActivity().getClass().getName());
             return;
         }
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri,"image/*");
-        intent.putExtra("crop","true");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
         //裁剪宽高
-        intent.putExtra("aspectX",1);
-        intent.putExtra("aspectY",1);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
         //裁剪质量
-        intent.putExtra("outputX",320);
-        intent.putExtra("outputY",320);
-        startActivityForResult(intent,RESULT_REQUESTCODE);
+        intent.putExtra("outputX", 320);
+        intent.putExtra("outputY", 320);
+        //发送数据
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, RESULT_REQUESTCODE);
+    }
+
+    //设置图片
+    private void setImageToView(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            Bitmap bitmap = bundle.getParcelable("data");
+            profile_image.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UtilTools.putImageToShare(getActivity(),profile_image);
+
     }
 }
